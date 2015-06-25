@@ -1,7 +1,12 @@
 CC = gcc
 AR = ar rc
+ifeq ($(windir),)
 RM = rm -f
 CP = cp
+else
+RM = del
+CP = copy /y
+endif
 
 CFLAGS = -ffunction-sections -O3
 LIB = libmincrypt.a
