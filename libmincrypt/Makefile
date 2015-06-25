@@ -1,11 +1,11 @@
 CC = gcc
-AR = ar rcs
+AR = ar rc
 RM = rm -f
 CP = cp
 
-CFLAGS = -O3
+CFLAGS = -ffunction-sections -O3
 LIB = libmincrypt.a
-LIB_OBJS = rsa.o sha.o sha256.o
+LIB_OBJS = dsa_sig.o p256.o p256_ec.o p256_ecdsa.o rsa.o sha.o sha256.o
 INC  = -I..
 
 all:$(LIB)
