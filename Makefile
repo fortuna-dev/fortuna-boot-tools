@@ -11,7 +11,7 @@ endif
 CFLAGS = -ffunction-sections -O3
 LDFLAGS = -Wl,--gc-sections
 
-all: libmincrypt.a mkbootimg unpackbootimg mkbootfs
+all: libmincrypt.a mkbootimg unpackbootimg mkbootfs dtbToolCM
 
 libmincrypt.a:
 	make -C libmincrypt
@@ -41,6 +41,6 @@ unpackbootimg.o: unpackbootimg.c
 	$(CC) -o $@ $(CFLAGS) -c $<
 
 clean:
-	$(RM) mkbootimg mkbootimg-static mkbootimg.o unpackbootimg unpackbootimg-static unpackbootimg.o mkbootfs mkbootfs.o
+	$(RM) mkbootimg mkbootimg-static mkbootimg.o unpackbootimg unpackbootimg-static unpackbootimg.o mkbootfs mkbootfs.o dtbToolCM
 	$(RM) libmincrypt.a Makefile.~
 	make -C libmincrypt clean

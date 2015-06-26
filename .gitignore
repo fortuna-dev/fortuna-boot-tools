@@ -1,6 +1,7 @@
 *.o
 *.a
 *.exe
+dtbToolCM
 mkbootfs
 mkbootimg
 unpackbootimg
