@@ -11,19 +11,22 @@ endif
 CFLAGS = -ffunction-sections -O3
 LDFLAGS = -Wl,--gc-sections
 
-all: libmincrypt.a mkbootimg unpackbootimg
+all: libmincrypt.a mkbootimg unpackbootimg mkbootfs
 
 libmincrypt.a:
 	make -C libmincrypt
 
-mkbootimg$(EXE):mkbootimg.o
-	$(CROSS_COMPILE)$(CC) -o $@ $^ -L. -lmincrypt
+mkbootfs$(EXE):mkbootfs.o
+	$(CC) -o $@ $^ -L. $(LDFLAGS) -static -s
 
-mkbootimg-static$(EXE):mkbootimg.o
-	$(CROSS_COMPILE)$(CC) -o $@ $^ -L. -lmincrypt -static
+.c.o:
+	$(CC) -o $@ $(CFLAGS) -c $< -I. -Werror
 
 mkbootimg: mkbootimg.o
 	$(CC) -o $@ $^ -L. -lmincrypt $(LDFLAGS) -s
+
+mkbootimg-static$(EXE):mkbootimg.o
+	$(CC) -o $@ $^ -L. -lmincrypt -static
 
 mkbootimg.o: mkbootimg.c
 	$(CC) -o $@ $(CFLAGS) -c $< -I.
@@ -32,13 +35,12 @@ unpackbootimg: unpackbootimg.o
 	$(CC) -o $@ $^ $(LDFLAGS) -static -s
 
 unpackbootimg-static$(EXE):unpackbootimg.o
-	$(CROSS_COMPILE)$(CC) -o $@ $^ -static
+	$(CC) -o $@ $^ -static
 
 unpackbootimg.o: unpackbootimg.c
 	$(CC) -o $@ $(CFLAGS) -c $<
 
 clean:
-	$(RM) mkbootimg mkbootimg-static mkbootimg.o unpackbootimg unpackbootimg-static unpackbootimg.o
+	$(RM) mkbootimg mkbootimg-static mkbootimg.o unpackbootimg unpackbootimg-static unpackbootimg.o mkbootfs mkbootfs.o
 	$(RM) libmincrypt.a Makefile.~
 	make -C libmincrypt clean
-	
