@@ -1,6 +1,7 @@
 # fortuna-boot-tools
 Pack and unpack boot.img or recovery.img
 source code from: 
+* https://github.com/CyanogenMod/android_device_qcom_common/tree/cm-12.1/dtbtool
 * https://github.com/CyanogenMod/android_system_core/tree/cm-12.1/cpio/mkbootfs.c
 * https://github.com/CyanogenMod/android_system_core/tree/cm-12.1/mkbootimg
 * https://github.com/CyanogenMod/android_system_core/tree/cm-12.1/libmincrypt
@@ -19,10 +20,8 @@ $ make clean
 
 ### SetUp in Linux
 ```
-$ sudo cp ~/mkbootfs /bin/mkbootfs
 $ sudo cp ~/mkbootimg /bin/mkbootimg
 $ sudo cp ~/unpackbootimg /bin/unpackbootimg
-$ sudo chmod 755 /bin/mkbootfs
 $ sudo chmod 755 /bin/mkbootimg
 $ sudo chmod 755 /bin/unpackbootimg
 ```
